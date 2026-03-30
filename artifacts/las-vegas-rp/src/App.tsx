@@ -3,7 +3,7 @@ import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { 
   ShieldCheck, 
   PaintBucket, 
@@ -496,14 +496,83 @@ function Router() {
   );
 }
 
+function LoadingScreen({ onDone }: { onDone: () => void }) {
+  useEffect(() => {
+    const timer = setTimeout(onDone, 2800);
+    return () => clearTimeout(timer);
+  }, [onDone]);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-background"
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.7, ease: "easeInOut" }}
+    >
+      {/* Radial glow behind logo */}
+      <div className="absolute w-80 h-80 rounded-full bg-primary/10 blur-[80px] pointer-events-none" />
+
+      {/* Breathing dice logo */}
+      <motion.div
+        className="relative flex items-center gap-3 mb-8"
+        animate={{
+          scale: [1, 1.08, 1],
+          filter: [
+            "drop-shadow(0 0 12px rgba(157,78,221,0.5))",
+            "drop-shadow(0 0 28px rgba(157,78,221,0.9))",
+            "drop-shadow(0 0 12px rgba(157,78,221,0.5))",
+          ],
+        }}
+        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <Dice5 className="w-16 h-16 text-primary" />
+        <Dice6 className="w-16 h-16 text-primary" />
+      </motion.div>
+
+      {/* Server name */}
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+        className="flex flex-col items-center gap-2"
+      >
+        <span className="font-display font-black text-3xl tracking-widest text-white neon-text-glow">
+          VEGAS<span className="text-primary">RP</span>
+        </span>
+        <span className="text-xs tracking-[0.3em] uppercase text-foreground/50 font-medium">
+          Las Vegas Roleplay
+        </span>
+      </motion.div>
+
+      {/* Subtle loading bar */}
+      <motion.div
+        className="absolute bottom-12 w-32 h-0.5 rounded-full bg-primary/20 overflow-hidden"
+      >
+        <motion.div
+          className="h-full bg-primary rounded-full"
+          initial={{ x: "-100%" }}
+          animate={{ x: "100%" }}
+          transition={{ duration: 2.2, ease: "easeInOut", repeat: Infinity }}
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
+
 function App() {
+  const [loading, setLoading] = useState(true);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
+        <AnimatePresence mode="wait">
+          {loading && <LoadingScreen key="loader" onDone={() => setLoading(false)} />}
+        </AnimatePresence>
+        {!loading && (
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <Router />
+            <Toaster />
+          </WouterRouter>
+        )}
       </TooltipProvider>
     </QueryClientProvider>
   );
