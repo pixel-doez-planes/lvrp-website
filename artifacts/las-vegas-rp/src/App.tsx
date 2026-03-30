@@ -93,7 +93,7 @@ function Hero() {
           <div className="text-center opacity-30">
             <span className="block text-sm uppercase tracking-[0.3em] text-primary mb-2">Cinematic Background Slot</span>
             <div className="w-full h-full max-w-4xl mx-auto aspect-[21/9] rounded-2xl border-2 border-dashed border-primary/30 flex items-center justify-center neon-box-glow">
-              <span className="text-muted-foreground font-mono">Insert Las Vegas Skyline RP Image Here</span>
+              <img src="/skyline.jpg" alt="Las Vegas Skyline" className="w-full h-full object-cover rounded-2xl" />
             </div>
           </div>
         </div>
@@ -311,7 +311,7 @@ const departments = [
     shadow: "hover:shadow-[0_0_30px_rgba(148,163,184,0.35)]",
     border: "group-hover:border-slate-400",
     desc: "State troopers patrolling Nevada's highways and interstates. Enforce traffic laws, respond to accidents, and conduct high-speed pursuits across open desert roads.",
-    image: null, // e.g. "/departments/NHP.jpg"
+    image: "/departments/nhp-dep.png"
   },
   {
     name: "LVFR",
