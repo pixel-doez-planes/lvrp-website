@@ -53,7 +53,7 @@ function Navbar() {
           <Dice5 className="w-7 h-7 text-primary" />
           <Dice6 className="w-7 h-7 text-primary -ml-1" />
           <span className="font-display font-bold text-xl tracking-wider text-white neon-text-glow">
-            VEGAS<span className="text-primary">RP</span>
+            LAS VEGAS<span className="text-primary">RP</span>
           </span>
         </div>
         <div className="hidden md:flex items-center gap-8">
@@ -130,7 +130,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-lg md:text-2xl text-foreground/80 max-w-2xl mx-auto mb-10 font-light"
         >
-          Step into the electric nights of Liberty City. Professional roleplay, custom liveries, and an immersive community that never sleeps.
+          Experience one of the biggest, most immersive ER:LC servers on Roblox. Join our active community of over 20k players with 24/7 sessions, custom liveries, and professional roleplays.
         </motion.p>
         
         <motion.div
@@ -154,7 +154,7 @@ function Hero() {
             data-testid="link-hero-features"
             className="px-8 py-4 rounded-full font-bold text-lg text-white border border-primary/30 hover:bg-primary/10 transition-all w-full sm:w-auto neon-box-glow"
           >
-            Explore the City
+            Explore the Server
           </a>
         </motion.div>
       </div>
@@ -192,17 +192,12 @@ const features = [
   {
     icon: <Building2 className="w-8 h-8" />,
     title: "Custom Departments",
-    desc: "Multiple factions including LVMPD, Fire, EMS, and more with specialized roles."
+    desc: "Multiple departments including LVMPD, NLVPD, CCSO, NHP, LVFR, CCFD, DOT, and more."
   },
   {
     icon: <Users className="w-8 h-8" />,
     title: "Active Community",
-    desc: "A friendly, engaged player base that keeps the city alive and dynamic 24/7."
-  },
-  {
-    icon: <CalendarDays className="w-8 h-8" />,
-    title: "Regular Events",
-    desc: "Scheduled in-game events, massive patrols, and community gatherings."
+    desc: "A friendly, engaged player base that keeps the server alive, and 24/7 sessions."
   },
   {
     icon: <Wrench className="w-8 h-8" />,
@@ -231,7 +226,7 @@ function Features() {
             transition={{ delay: 0.1 }}
             className="text-foreground/70 max-w-2xl mx-auto"
           >
-            Experience ER:LC like never before with premium features designed to elevate your roleplay.
+            Experience the best server, with a focus on realism, active moderation, and a huge community.
           </motion.p>
         </div>
 
@@ -268,7 +263,7 @@ const departments = [
     color: "from-blue-500 to-blue-900",
     shadow: "hover:shadow-[0_0_30px_rgba(59,130,246,0.35)]",
     border: "group-hover:border-blue-500",
-    desc: "The primary law enforcement agency serving Las Vegas and unincorporated Clark County. Conduct high-speed pursuits, tactical operations, and keep the neon streets in check."
+    desc: "Placeholder"
   },
   {
     name: "NLVPD",
@@ -277,7 +272,7 @@ const departments = [
     color: "from-indigo-500 to-indigo-900",
     shadow: "hover:shadow-[0_0_30px_rgba(99,102,241,0.35)]",
     border: "group-hover:border-indigo-500",
-    desc: "Serving the city of North Las Vegas with a separate jurisdiction from Metro. Patrol the north end, respond to calls, and uphold the law in a distinct part of the valley."
+    desc: "Placeholder"
   },
   {
     name: "CCSO",
@@ -286,7 +281,7 @@ const departments = [
     color: "from-yellow-500 to-yellow-900",
     shadow: "hover:shadow-[0_0_30px_rgba(234,179,8,0.35)]",
     border: "group-hover:border-yellow-500",
-    desc: "Clark County's sheriff department handling county-level law enforcement, corrections, and civil duties across a wide jurisdiction stretching beyond the city limits."
+    desc: "Placeholder"
   },
   {
     name: "NHP",
@@ -295,7 +290,7 @@ const departments = [
     color: "from-slate-400 to-slate-800",
     shadow: "hover:shadow-[0_0_30px_rgba(148,163,184,0.35)]",
     border: "group-hover:border-slate-400",
-    desc: "State troopers patrolling Nevada's highways and interstates. Enforce traffic laws, respond to accidents, and conduct high-speed pursuits across open desert roads."
+    desc: "Placeholder"
   },
   {
     name: "LVFR",
@@ -304,7 +299,7 @@ const departments = [
     color: "from-red-500 to-red-900",
     shadow: "hover:shadow-[0_0_30px_rgba(239,68,68,0.35)]",
     border: "group-hover:border-red-500",
-    desc: "City of Las Vegas' fire and emergency services division. Fight structure fires, respond to vehicle accidents, and deliver life-saving emergency medical care across the strip."
+    desc: "Placeholder"
   },
   {
     name: "CCFD",
@@ -313,7 +308,7 @@ const departments = [
     color: "from-orange-500 to-orange-900",
     shadow: "hover:shadow-[0_0_30px_rgba(249,115,22,0.35)]",
     border: "group-hover:border-orange-500",
-    desc: "Protecting unincorporated Clark County with fire suppression and emergency medical services. From suburban neighborhoods to desert terrain, CCFD covers it all."
+    desc: "(Whitelisted) Placeholder"
   },
   {
     name: "DOT",
@@ -322,16 +317,7 @@ const departments = [
     color: "from-lime-500 to-lime-900",
     shadow: "hover:shadow-[0_0_30px_rgba(132,204,22,0.35)]",
     border: "group-hover:border-lime-500",
-    desc: "Keeping Nevada's roads safe and operational. Manage traffic control, respond to road incidents, clear debris, and maintain infrastructure across the Las Vegas valley."
-  },
-  {
-    name: "EMS",
-    full: "Emergency Medical Services",
-    icon: <Activity className="w-6 h-6" />,
-    color: "from-emerald-500 to-emerald-900",
-    shadow: "hover:shadow-[0_0_30px_rgba(16,185,129,0.35)]",
-    border: "group-hover:border-emerald-500",
-    desc: "Advanced life support paramedics responding to medical emergencies citywide. Fast-paced trauma response, patient transport, and life-or-death scenarios on every shift."
+    desc: "Placeholder"
   },
 ];
 
@@ -357,7 +343,7 @@ function Departments() {
               transition={{ delay: 0.1 }}
               className="text-foreground/70"
             >
-              Multiple factions with custom liveries and unique gameplay loops. Where do you belong in the city?
+              Multiple departments with custom liveries and unique opprtunities to roleplay.
             </motion.p>
           </div>
         </div>
@@ -411,7 +397,7 @@ function CommunityGallery() {
           viewport={{ once: true }}
           className="text-4xl md:text-5xl font-display font-bold text-white mb-4 neon-text-glow-secondary"
         >
-          The City Never Sleeps
+          The best roleplay immaginable
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
@@ -420,7 +406,7 @@ function CommunityGallery() {
           transition={{ delay: 0.1 }}
           className="text-foreground/70 max-w-2xl mx-auto"
         >
-          Glimpses into the stories, events, and action created daily by our players.
+          Work on getting pics from MT.
         </motion.p>
       </div>
 
@@ -498,7 +484,7 @@ function Footer() {
         </div>
         
         <p className="text-foreground/50 text-sm text-center md:text-left">
-          &copy; {new Date().getFullYear()} Las Vegas Roleplay. All rights reserved. Not affiliated with Roblox or ER:LC creators.
+          &copy; {new Date().getFullYear()} Las Vegas Roleplay. All rights reserved. Not affiliated with Roblox or Police Roleplay Community.
         </p>
 
         <div className="flex items-center gap-4">
