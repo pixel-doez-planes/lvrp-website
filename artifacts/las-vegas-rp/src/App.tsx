@@ -511,9 +511,13 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
       {/* Radial glow behind logo */}
       <div className="absolute w-80 h-80 rounded-full bg-primary/10 blur-[80px] pointer-events-none" />
 
-      {/* Breathing dice logo */}
+      {/* -------------------------------------------------------
+          LOADING LOGO — replace /loading-logo.svg with your own
+          image file placed in the `public/` folder.
+          Recommended: 120×120px PNG or SVG, transparent background.
+          ------------------------------------------------------- */}
       <motion.div
-        className="relative flex items-center gap-3 mb-8"
+        className="relative mb-8"
         animate={{
           scale: [1, 1.08, 1],
           filter: [
@@ -524,8 +528,13 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
         }}
         transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
       >
-        <Dice5 className="w-16 h-16 text-primary" />
-        <Dice6 className="w-16 h-16 text-primary" />
+        <img
+          src="/loading-logo.svg"
+          alt="Las Vegas Roleplay Logo"
+          width={120}
+          height={120}
+          className="rounded-2xl"
+        />
       </motion.div>
 
       {/* Server name */}
