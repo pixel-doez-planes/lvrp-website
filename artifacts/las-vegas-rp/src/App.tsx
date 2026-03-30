@@ -255,6 +255,13 @@ function Features() {
   );
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// DEPARTMENT PHOTOS
+// To add a photo to a department:
+//   1. Upload your image file into the  public/departments/  folder
+//   2. Set the  image  field below to the file name, e.g.  "/departments/LVMPD.jpg"
+//   3. Leave  image: null  to keep the placeholder until you have a photo ready.
+// ─────────────────────────────────────────────────────────────────────────────
 const departments = [
   {
     name: "LVMPD",
@@ -263,7 +270,8 @@ const departments = [
     color: "from-blue-500 to-blue-900",
     shadow: "hover:shadow-[0_0_30px_rgba(59,130,246,0.35)]",
     border: "group-hover:border-blue-500",
-    desc: "Placeholder"
+    desc: "The primary law enforcement agency serving Las Vegas and unincorporated Clark County. Conduct high-speed pursuits, tactical operations, and keep the neon streets in check.",
+    image: null, // e.g. "/departments/LVMPD.jpg"
   },
   {
     name: "NLVPD",
@@ -272,7 +280,18 @@ const departments = [
     color: "from-indigo-500 to-indigo-900",
     shadow: "hover:shadow-[0_0_30px_rgba(99,102,241,0.35)]",
     border: "group-hover:border-indigo-500",
-    desc: "Placeholder"
+    desc: "Serving the city of North Las Vegas with a separate jurisdiction from Metro. Patrol the north end, respond to calls, and uphold the law in a distinct part of the valley.",
+    image: null, // e.g. "/departments/NLVPD.jpg"
+  },
+  {
+    name: "SWAT",
+    full: "Special Weapons and Tactics",
+    icon: <Crosshair className="w-6 h-6" />,
+    color: "from-zinc-500 to-zinc-900",
+    shadow: "hover:shadow-[0_0_30px_rgba(113,113,122,0.35)]",
+    border: "group-hover:border-zinc-500",
+    desc: "Elite tactical unit deployed for high-risk operations, hostage rescue, and heavily armed incidents. The last line of defense when standard patrol is not enough.",
+    image: null, // e.g. "/departments/SWAT.jpg"
   },
   {
     name: "CCSO",
@@ -281,7 +300,8 @@ const departments = [
     color: "from-yellow-500 to-yellow-900",
     shadow: "hover:shadow-[0_0_30px_rgba(234,179,8,0.35)]",
     border: "group-hover:border-yellow-500",
-    desc: "Placeholder"
+    desc: "Clark County's sheriff department handling county-level law enforcement, corrections, and civil duties across a wide jurisdiction stretching beyond the city limits.",
+    image: null, // e.g. "/departments/CCSO.jpg"
   },
   {
     name: "NHP",
@@ -290,7 +310,8 @@ const departments = [
     color: "from-slate-400 to-slate-800",
     shadow: "hover:shadow-[0_0_30px_rgba(148,163,184,0.35)]",
     border: "group-hover:border-slate-400",
-    desc: "Placeholder"
+    desc: "State troopers patrolling Nevada's highways and interstates. Enforce traffic laws, respond to accidents, and conduct high-speed pursuits across open desert roads.",
+    image: null, // e.g. "/departments/NHP.jpg"
   },
   {
     name: "LVFR",
@@ -299,7 +320,8 @@ const departments = [
     color: "from-red-500 to-red-900",
     shadow: "hover:shadow-[0_0_30px_rgba(239,68,68,0.35)]",
     border: "group-hover:border-red-500",
-    desc: "Placeholder"
+    desc: "City of Las Vegas' fire and emergency services division. Fight structure fires, respond to vehicle accidents, and deliver life-saving emergency medical care across the strip.",
+    image: null, // e.g. "/departments/LVFR.jpg"
   },
   {
     name: "CCFD",
@@ -308,7 +330,8 @@ const departments = [
     color: "from-orange-500 to-orange-900",
     shadow: "hover:shadow-[0_0_30px_rgba(249,115,22,0.35)]",
     border: "group-hover:border-orange-500",
-    desc: "(Whitelisted) Placeholder"
+    desc: "Protecting unincorporated Clark County with fire suppression and emergency medical services. From suburban neighborhoods to desert terrain, CCFD covers it all.",
+    image: null, // e.g. "/departments/CCFD.jpg"
   },
   {
     name: "DOT",
@@ -317,7 +340,8 @@ const departments = [
     color: "from-lime-500 to-lime-900",
     shadow: "hover:shadow-[0_0_30px_rgba(132,204,22,0.35)]",
     border: "group-hover:border-lime-500",
-    desc: "Placeholder"
+    desc: "Keeping Nevada's roads safe and operational. Manage traffic control, respond to road incidents, clear debris, and maintain infrastructure across the Las Vegas valley.",
+    image: null, // e.g. "/departments/DOT.jpg"
   },
 ];
 
@@ -372,9 +396,20 @@ function Departments() {
                 </div>
                 <p className="text-foreground/75 text-sm mb-5 leading-relaxed">{dept.desc}</p>
 
-                {/* Image Placeholder */}
-                <div className="w-full aspect-[16/9] rounded-xl border border-primary/20 bg-background/50 flex items-center justify-center overflow-hidden">
-                  <span className="text-[10px] uppercase tracking-widest text-primary/40 font-mono">Image Slot: {dept.name}</span>
+                {/* Department Photo — set dept.image to show a real photo */}
+                <div className="w-full aspect-[16/9] rounded-xl border border-primary/20 bg-background/50 overflow-hidden flex items-center justify-center relative">
+                  {dept.image ? (
+                    <img
+                      src={dept.image}
+                      alt={`${dept.name} department`}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center gap-1 text-center px-3">
+                      <span className="text-primary/40 text-2xl">+</span>
+                      <span className="text-[9px] uppercase tracking-widest text-primary/30 font-mono">Add photo for {dept.name}</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -562,7 +597,7 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
         transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
       >
         <img
-          src="/loading-logo.svg"
+          src="/loading-logo.jpeg"
           alt="Las Vegas Roleplay Logo"
           width={120}
           height={120}
