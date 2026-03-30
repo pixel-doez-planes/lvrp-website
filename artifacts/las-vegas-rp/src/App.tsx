@@ -18,7 +18,11 @@ import {
   Crosshair,
   BadgeAlert,
   Flame,
-  Stethoscope
+  Stethoscope,
+  Shield,
+  Star,
+  Truck,
+  Activity
 } from "lucide-react";
 import NotFound from "@/pages/not-found";
 
@@ -258,37 +262,77 @@ function Features() {
 
 const departments = [
   {
-    name: "Police Department",
+    name: "LVMPD",
+    full: "Las Vegas Metropolitan Police Department",
     icon: <BadgeAlert className="w-6 h-6" />,
-    color: "from-blue-600 to-blue-900",
-    shadow: "hover:shadow-[0_0_30px_rgba(37,99,235,0.3)]",
+    color: "from-blue-500 to-blue-900",
+    shadow: "hover:shadow-[0_0_30px_rgba(59,130,246,0.35)]",
     border: "group-hover:border-blue-500",
-    desc: "Maintain order on the neon streets. High-speed pursuits and tactical operations."
+    desc: "The primary law enforcement agency serving Las Vegas and unincorporated Clark County. Conduct high-speed pursuits, tactical operations, and keep the neon streets in check."
   },
   {
-    name: "Fire Department",
+    name: "NLVPD",
+    full: "North Las Vegas Police Department",
+    icon: <Shield className="w-6 h-6" />,
+    color: "from-indigo-500 to-indigo-900",
+    shadow: "hover:shadow-[0_0_30px_rgba(99,102,241,0.35)]",
+    border: "group-hover:border-indigo-500",
+    desc: "Serving the city of North Las Vegas with a separate jurisdiction from Metro. Patrol the north end, respond to calls, and uphold the law in a distinct part of the valley."
+  },
+  {
+    name: "CCSO",
+    full: "Clark County Sheriff's Office",
+    icon: <Star className="w-6 h-6" />,
+    color: "from-yellow-500 to-yellow-900",
+    shadow: "hover:shadow-[0_0_30px_rgba(234,179,8,0.35)]",
+    border: "group-hover:border-yellow-500",
+    desc: "Clark County's sheriff department handling county-level law enforcement, corrections, and civil duties across a wide jurisdiction stretching beyond the city limits."
+  },
+  {
+    name: "NHP",
+    full: "Nevada Highway Patrol",
+    icon: <CarFront className="w-6 h-6" />,
+    color: "from-slate-400 to-slate-800",
+    shadow: "hover:shadow-[0_0_30px_rgba(148,163,184,0.35)]",
+    border: "group-hover:border-slate-400",
+    desc: "State troopers patrolling Nevada's highways and interstates. Enforce traffic laws, respond to accidents, and conduct high-speed pursuits across open desert roads."
+  },
+  {
+    name: "LVFR",
+    full: "Las Vegas Fire & Rescue",
     icon: <Flame className="w-6 h-6" />,
     color: "from-red-500 to-red-900",
-    shadow: "hover:shadow-[0_0_30px_rgba(239,68,68,0.3)]",
+    shadow: "hover:shadow-[0_0_30px_rgba(239,68,68,0.35)]",
     border: "group-hover:border-red-500",
-    desc: "Respond to emergencies, fight blazes, and save lives in dynamic scenarios."
+    desc: "City of Las Vegas' fire and emergency services division. Fight structure fires, respond to vehicle accidents, and deliver life-saving emergency medical care across the strip."
   },
   {
-    name: "EMS Services",
-    icon: <Stethoscope className="w-6 h-6" />,
+    name: "CCFD",
+    full: "Clark County Fire Department",
+    icon: <Flame className="w-6 h-6" />,
+    color: "from-orange-500 to-orange-900",
+    shadow: "hover:shadow-[0_0_30px_rgba(249,115,22,0.35)]",
+    border: "group-hover:border-orange-500",
+    desc: "Protecting unincorporated Clark County with fire suppression and emergency medical services. From suburban neighborhoods to desert terrain, CCFD covers it all."
+  },
+  {
+    name: "DOT",
+    full: "Nevada Department of Transportation",
+    icon: <Truck className="w-6 h-6" />,
+    color: "from-lime-500 to-lime-900",
+    shadow: "hover:shadow-[0_0_30px_rgba(132,204,22,0.35)]",
+    border: "group-hover:border-lime-500",
+    desc: "Keeping Nevada's roads safe and operational. Manage traffic control, respond to road incidents, clear debris, and maintain infrastructure across the Las Vegas valley."
+  },
+  {
+    name: "EMS",
+    full: "Emergency Medical Services",
+    icon: <Activity className="w-6 h-6" />,
     color: "from-emerald-500 to-emerald-900",
-    shadow: "hover:shadow-[0_0_30px_rgba(16,185,129,0.3)]",
+    shadow: "hover:shadow-[0_0_30px_rgba(16,185,129,0.35)]",
     border: "group-hover:border-emerald-500",
-    desc: "Crucial medical support for the city. Fast-paced trauma response."
+    desc: "Advanced life support paramedics responding to medical emergencies citywide. Fast-paced trauma response, patient transport, and life-or-death scenarios on every shift."
   },
-  {
-    name: "Civilian Life",
-    icon: <CarFront className="w-6 h-6" />,
-    color: "from-secondary to-purple-900",
-    shadow: "hover:shadow-[0_0_30px_rgba(217,70,239,0.3)]",
-    border: "group-hover:border-secondary",
-    desc: "Run businesses, drive custom exotics, or walk the path of the criminal underground."
-  }
 ];
 
 function Departments() {
@@ -318,30 +362,33 @@ function Departments() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {departments.map((dept, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className={`group relative overflow-hidden rounded-3xl bg-card border border-primary/10 transition-all duration-500 p-8 ${dept.shadow} ${dept.border}`}
+              transition={{ delay: idx * 0.07 }}
+              className={`group relative overflow-hidden rounded-3xl bg-card border border-primary/10 transition-all duration-500 p-6 ${dept.shadow} ${dept.border}`}
             >
-              <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl ${dept.color} opacity-10 rounded-full blur-3xl group-hover:opacity-30 transition-opacity duration-500`}></div>
-              
+              <div className={`absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl ${dept.color} opacity-10 rounded-full blur-3xl group-hover:opacity-25 transition-opacity duration-500`}></div>
+
               <div className="relative z-10">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-4 rounded-xl bg-background/50 border border-primary/20 backdrop-blur-sm text-white">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-3 rounded-xl bg-background/50 border border-primary/20 backdrop-blur-sm text-white">
                     {dept.icon}
                   </div>
-                  <h3 className="text-2xl font-bold text-white">{dept.name}</h3>
+                  <div>
+                    <h3 className="text-xl font-black text-white leading-tight">{dept.name}</h3>
+                    <p className="text-[10px] uppercase tracking-widest text-foreground/50 font-medium leading-tight">{dept.full}</p>
+                  </div>
                 </div>
-                <p className="text-foreground/80 mb-8">{dept.desc}</p>
-                
+                <p className="text-foreground/75 text-sm mb-5 leading-relaxed">{dept.desc}</p>
+
                 {/* Image Placeholder */}
                 <div className="w-full aspect-[16/9] rounded-xl border border-primary/20 bg-background/50 flex items-center justify-center overflow-hidden">
-                  <span className="text-xs uppercase tracking-widest text-primary/50 font-mono">Image Slot: {dept.name}</span>
+                  <span className="text-[10px] uppercase tracking-widest text-primary/40 font-mono">Image Slot: {dept.name}</span>
                 </div>
               </div>
             </motion.div>
