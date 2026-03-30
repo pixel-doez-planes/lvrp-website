@@ -12,7 +12,8 @@ import {
   CalendarDays, 
   Wrench,
   ChevronDown,
-  Gamepad2,
+  Dice5,
+  Dice6,
   CarFront,
   Crosshair,
   BadgeAlert,
@@ -45,7 +46,8 @@ function Navbar() {
     >
       <div className="container mx-auto px-6 h-20 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Gamepad2 className="w-8 h-8 text-primary" />
+          <Dice5 className="w-7 h-7 text-primary" />
+          <Dice6 className="w-7 h-7 text-primary -ml-1" />
           <span className="font-display font-bold text-xl tracking-wider text-white neon-text-glow">
             VEGAS<span className="text-primary">RP</span>
           </span>
@@ -409,7 +411,10 @@ function CTA() {
           <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-card to-secondary/20"></div>
           
           <div className="relative z-10 px-6 py-24 md:py-32 text-center flex flex-col items-center">
-            <Gamepad2 className="w-16 h-16 text-primary mb-8 drop-shadow-[0_0_15px_rgba(157,78,221,0.8)]" />
+            <div className="flex items-center gap-1 mb-8">
+              <Dice5 className="w-14 h-14 text-primary drop-shadow-[0_0_15px_rgba(157,78,221,0.8)]" />
+              <Dice6 className="w-14 h-14 text-primary drop-shadow-[0_0_15px_rgba(157,78,221,0.8)]" />
+            </div>
             <h2 className="text-5xl md:text-7xl font-display font-black text-white mb-6 tracking-tight">
               Ready to Hit <br/> The <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary neon-text-glow">Strip?</span>
             </h2>
@@ -438,7 +443,8 @@ function Footer() {
     <footer className="border-t border-primary/20 bg-background py-12 relative z-10">
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-2">
-          <Gamepad2 className="w-6 h-6 text-primary" />
+          <Dice5 className="w-5 h-5 text-primary" />
+          <Dice6 className="w-5 h-5 text-primary -ml-0.5" />
           <span className="font-display font-bold text-lg tracking-wider text-white">
             VEGAS<span className="text-primary">RP</span>
           </span>
