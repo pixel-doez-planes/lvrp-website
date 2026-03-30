@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Las Vegas Roleplay"
+version = "1.0.0"
+id = "artifacts/las-vegas-rp"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21147
+
+[services.development]
+run = "pnpm --filter @workspace/las-vegas-rp run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/las-vegas-rp", "run", "build" ]
+publicDir = "artifacts/las-vegas-rp/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21147"
+BASE_PATH = "/"
