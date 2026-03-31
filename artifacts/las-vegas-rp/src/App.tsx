@@ -24,6 +24,7 @@ import {
   Truck,
   Activity,
   Menu,
+  Dices,
   X,
 } from "lucide-react";
 import NotFound from "@/pages/not-found";
@@ -61,8 +62,7 @@ function Navbar() {
       <div className="container mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center gap-2">
-          <Dice5 className="w-7 h-7 text-primary" />
-          <Dice6 className="w-7 h-7 text-primary -ml-1" />
+          <Dices className="w-7 h-7 text-primary" />
           <span className="font-display font-bold text-xl tracking-wider text-white neon-text-glow">
             VEGAS<span className="text-primary">RP</span>
           </span>
@@ -755,8 +755,7 @@ function Footer() {
     <footer className="border-t border-primary/20 bg-background py-12 relative z-10">
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-2">
-          <Dice5 className="w-5 h-5 text-primary" />
-          <Dice6 className="w-5 h-5 text-primary -ml-0.5" />
+          <Dices className="w-5 h-5 text-primary" />
           <span className="font-display font-bold text-lg tracking-wider text-white">
             VEGAS<span className="text-primary">RP</span>
           </span>
