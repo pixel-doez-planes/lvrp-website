@@ -613,17 +613,16 @@ const galleryRow2: (string | null)[] = [
 function GalleryCard({ src, label }: { src: string | null; label: number }) {
   return (
     <div
-      className="flex-none w-[240px] sm:w-[340px] md:w-[400px] aspect-[4/3] rounded-2xl border border-primary/20 bg-card/80 overflow-hidden relative group"
+      className="flex-none h-52 sm:h-60 md:h-72 rounded-2xl border border-primary/20 bg-card/80 overflow-hidden relative group"
     >
       {src ? (
         <img
           src={src}
           alt={`Gallery photo ${label}`}
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          className="transition-transform duration-500 group-hover:scale-105"
+          className="h-full w-auto max-w-none object-cover transition-transform duration-500 group-hover:scale-105"
         />
       ) : (
-        <div style={{ width: "100%", height: "100%" }} className="flex flex-col items-center justify-center gap-2 bg-primary/5">
+        <div className="h-full w-52 sm:w-60 md:w-72 flex flex-col items-center justify-center gap-2 bg-primary/5">
           <span className="text-primary/50 text-4xl leading-none">+</span>
           <span className="text-[10px] uppercase tracking-widest text-primary/50 font-mono">Photo {label}</span>
         </div>
