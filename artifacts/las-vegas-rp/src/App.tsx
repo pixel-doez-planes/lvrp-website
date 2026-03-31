@@ -59,6 +59,7 @@ function Navbar() {
         <div className="hidden md:flex items-center gap-8">
           <a href="#features" className="text-sm font-medium text-foreground/80 hover:text-white transition-colors">Features</a>
           <a href="#departments" className="text-sm font-medium text-foreground/80 hover:text-white transition-colors">Departments</a>
+          <a href="#directors" className="text-sm font-medium text-foreground/80 hover:text-white transition-colors">Directors</a>
           <a href="#community" className="text-sm font-medium text-foreground/80 hover:text-white transition-colors">Community</a>
         </div>
         <a 
@@ -724,6 +725,127 @@ function Footer() {
   );
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// DIRECTORS — add or edit entries here
+// discordId: right-click a user in Discord → "Copy User ID" (enable Dev Mode first)
+// role: their title shown on the card
+// bio: a short blurb about them
+// ─────────────────────────────────────────────────────────────────────────────
+const DIRECTORS = [
+  {
+    discordId: "000000000000000001", // replace with real Discord user ID
+    role: "Server Director",
+    bio: "Leads the overall vision and direction of Las Vegas Roleplay.",
+  },
+  {
+    discordId: "000000000000000002",
+    role: "Assistant Director",
+    bio: "Supports daily operations and department leadership.",
+  },
+  {
+    discordId: "000000000000000003",
+    role: "Community Director",
+    bio: "Manages community engagement, events, and player experience.",
+  },
+];
+
+type DiscordUser = {
+  id: string;
+  username: string;
+  displayName: string;
+  avatarUrl: string;
+};
+
+function DirectorCard({ discordId, role, bio }: { discordId: string; role: string; bio: string }) {
+  const [user, setUser] = React.useState<DiscordUser | null>(null);
+  const [error, setError] = React.useState(false);
+
+  React.useEffect(() => {
+    fetch(`/api/directors/${discordId}/avatar`)
+      .then((r) => r.ok ? r.json() : Promise.reject())
+      .then((data: DiscordUser) => setUser(data))
+      .catch(() => setError(true));
+  }, [discordId]);
+
+  const isPlaceholder = discordId.replace(/^0+/, "") === "" || discordId.startsWith("0000000000000000");
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="flex flex-col items-center text-center rounded-2xl bg-card/70 border border-primary/15 p-8 gap-5 hover:border-primary/40 transition-colors neon-box-glow group"
+    >
+      {/* Avatar */}
+      <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-primary/40 shadow-[0_0_20px_rgba(157,78,221,0.3)] group-hover:shadow-[0_0_30px_rgba(157,78,221,0.5)] transition-shadow">
+        {user && !isPlaceholder ? (
+          <img src={user.avatarUrl} alt={user.displayName} className="w-full h-full object-cover" />
+        ) : (
+          <div className="w-full h-full bg-primary/10 flex items-center justify-center">
+            <span className="text-primary/40 text-3xl font-bold">?</span>
+          </div>
+        )}
+        {/* Online indicator dot */}
+        <span className="absolute bottom-1 right-1 w-3.5 h-3.5 rounded-full bg-green-400 border-2 border-card shadow-[0_0_6px_#4ade80]" />
+      </div>
+
+      {/* Name */}
+      <div>
+        <p className="text-white font-bold text-lg leading-tight">
+          {user && !isPlaceholder ? user.displayName : (error ? "—" : "Loading...")}
+        </p>
+        {user && !isPlaceholder && (
+          <p className="text-foreground/40 text-xs font-mono mt-0.5">@{user.username}</p>
+        )}
+      </div>
+
+      {/* Role badge */}
+      <span className="px-3 py-1 rounded-full bg-primary/15 border border-primary/30 text-primary text-xs uppercase tracking-widest font-semibold">
+        {role}
+      </span>
+
+      {/* Bio */}
+      <p className="text-foreground/60 text-sm leading-relaxed">{bio}</p>
+    </motion.div>
+  );
+}
+
+function Directors() {
+  return (
+    <section id="directors" className="py-24 relative z-10 bg-background">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/8 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="container relative z-10 mx-auto px-6">
+        <div className="text-center mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-display font-bold text-white mb-4 neon-text-glow"
+          >
+            Meet Our Directors
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-foreground/60 max-w-xl mx-auto"
+          >
+            The leadership team behind Las Vegas Roleplay.
+          </motion.p>
+        </div>
+
+        <div className={`grid gap-6 ${DIRECTORS.length === 1 ? "max-w-sm mx-auto" : DIRECTORS.length === 2 ? "grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"}`}>
+          {DIRECTORS.map((d) => (
+            <DirectorCard key={d.discordId} {...d} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Home() {
   return (
     <div className="min-h-screen bg-background selection:bg-primary/30 selection:text-white">
@@ -735,6 +857,7 @@ function Home() {
       <LiveStats />
       <Features />
       <Departments />
+      <Directors />
       <CommunityGallery />
       <CTA />
       <Footer />
