@@ -420,46 +420,99 @@ function Departments() {
   );
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// GALLERY PHOTOS
+// To add images to the scrolling gallery:
+//   1. Upload your image files into  public/gallery/  (any name, any order)
+//   2. Add the filename to the array below, e.g. "/gallery/patrol.jpg"
+//   3. Leave null entries as placeholders until you have photos ready.
+//   Row 1 scrolls left, Row 2 scrolls right — they loop automatically.
+// ─────────────────────────────────────────────────────────────────────────────
+const galleryRow1: (string | null)[] = [
+  null, // replace with e.g. "/gallery/photo1.jpg"
+  null,
+  null,
+  null,
+  null,
+  null,
+];
+
+const galleryRow2: (string | null)[] = [
+  null, // replace with e.g. "/gallery/photo7.jpg"
+  null,
+  null,
+  null,
+  null,
+  null,
+];
+
+function GalleryCard({ src, index }: { src: string | null; index: number }) {
+  return (
+    <div className="flex-none w-[280px] md:w-[400px] aspect-[4/3] rounded-2xl border border-primary/15 bg-card/80 overflow-hidden relative group">
+      {src ? (
+        <img
+          src={src}
+          alt={`Gallery image ${index + 1}`}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      ) : (
+        <div className="w-full h-full flex flex-col items-center justify-center gap-2">
+          <span className="text-primary/25 text-3xl font-thin">+</span>
+          <span className="text-[9px] uppercase tracking-widest text-primary/25 font-mono">Photo {index + 1}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function GalleryTrack({ images, direction }: { images: (string | null)[]; direction: "left" | "right" }) {
+  const doubled = [...images, ...images];
+  return (
+    <div className={direction === "left" ? "gallery-track-left gap-4" : "gallery-track-right gap-4"}
+      style={{ gap: "1rem" }}>
+      {doubled.map((src, i) => (
+        <GalleryCard key={i} src={src} index={i % images.length} />
+      ))}
+    </div>
+  );
+}
+
 function CommunityGallery() {
   return (
     <section id="community" className="py-24 relative z-10 bg-background overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[120px] pointer-events-none"></div>
-      
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[120px] pointer-events-none" />
+
       <div className="container relative z-10 mx-auto px-6 text-center mb-16">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-4xl md:text-5xl font-display font-bold text-white mb-4 neon-text-glow-secondary"
         >
-          The best roleplay immaginable
+          The Streets Come Alive
         </motion.h2>
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
           className="text-foreground/70 max-w-2xl mx-auto"
         >
-          Work on getting pics from MT.
+          Real moments from the most immersive ER:LC experience in the game.
         </motion.p>
       </div>
 
-      {/* Scrolling Gallery Placeholder */}
-      <div className="relative w-full overflow-hidden flex flex-col gap-6 px-6 md:px-12">
-        <div className="flex gap-6 animate-scroll">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="flex-none w-[300px] md:w-[450px] aspect-[4/3] rounded-2xl border border-primary/20 bg-card/80 backdrop-blur-sm flex items-center justify-center neon-box-glow hover:border-secondary transition-colors"
-            >
-              <span className="text-sm font-mono text-muted-foreground">Community Image {i}</span>
-            </motion.div>
-          ))}
+      {/* Gallery rows with edge fade */}
+      <div className="relative flex flex-col gap-5">
+        {/* Fade edges */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-32 z-10 bg-gradient-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-32 z-10 bg-gradient-to-l from-background to-transparent" />
+
+        <div className="overflow-hidden">
+          <GalleryTrack images={galleryRow1} direction="left" />
+        </div>
+        <div className="overflow-hidden">
+          <GalleryTrack images={galleryRow2} direction="right" />
         </div>
       </div>
     </section>
