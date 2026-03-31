@@ -459,9 +459,9 @@ function GalleryCard({ src, label }: { src: string | null; label: number }) {
           className="transition-transform duration-500 group-hover:scale-105"
         />
       ) : (
-        <div style={{ width: "100%", height: "100%" }} className="flex flex-col items-center justify-center gap-2">
-          <span className="text-primary/25 text-4xl leading-none">+</span>
-          <span className="text-[9px] uppercase tracking-widest text-primary/25 font-mono">Photo {label}</span>
+        <div style={{ width: "100%", height: "100%" }} className="flex flex-col items-center justify-center gap-2 bg-primary/5">
+          <span className="text-primary/50 text-4xl leading-none">+</span>
+          <span className="text-[10px] uppercase tracking-widest text-primary/50 font-mono">Photo {label}</span>
         </div>
       )}
     </div>
