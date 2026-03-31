@@ -786,6 +786,72 @@ function Footer() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// VIDEO — set to a path like "/promo.mp4" to show the video section, or leave empty to hide it
+const VIDEO_SRC = "";
+
+function VideoShowcase() {
+  const isDebug = typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("debug") === "true";
+
+  if (!VIDEO_SRC && !isDebug) return null;
+
+  return (
+    <section className="relative z-10 bg-background py-16 md:py-24">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="container relative z-10 mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-10"
+        >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-3 neon-text-glow">
+            See It In Action
+          </h2>
+          <p className="text-foreground/60 max-w-xl mx-auto">
+            A look inside the world of Las Vegas Roleplay.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className="relative mx-auto max-w-5xl rounded-2xl overflow-hidden border border-primary/30 neon-box-glow shadow-[0_0_60px_rgba(157,78,221,0.15)]"
+        >
+          {VIDEO_SRC ? (
+            <video
+              src={VIDEO_SRC}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full aspect-video object-cover bg-black"
+            />
+          ) : (
+            /* Debug placeholder — only visible when ?debug=true */
+            <div className="w-full aspect-video bg-card/80 flex flex-col items-center justify-center gap-4">
+              <div className="w-20 h-20 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center">
+                <div className="w-0 h-0 border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent border-l-[20px] border-l-primary ml-1" />
+              </div>
+              <p className="text-foreground/50 text-sm font-mono">
+                Set <span className="text-primary">VIDEO_SRC</span> in App.tsx to display your video
+              </p>
+              <p className="text-foreground/30 text-xs font-mono">(placeholder visible because ?debug=true)</p>
+            </div>
+          )}
+
+          {/* Purple gradient overlays at edges */}
+          <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-background/40 to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-background/40 to-transparent pointer-events-none" />
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 // DIRECTORS — add or edit entries here
 // discordId: right-click a user in Discord → "Copy User ID" (enable Dev Mode first)
 // role: their title shown on the card
@@ -934,6 +1000,7 @@ function Home() {
       
       <Navbar />
       <Hero />
+      <VideoShowcase />
       <LiveStats />
       <Features />
       <Departments />
