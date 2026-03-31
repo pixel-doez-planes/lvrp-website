@@ -53,7 +53,7 @@ function Navbar() {
           <Dice5 className="w-7 h-7 text-primary" />
           <Dice6 className="w-7 h-7 text-primary -ml-1" />
           <span className="font-display font-bold text-xl tracking-wider text-white neon-text-glow">
-            LAS VEGAS<span className="text-primary">RP</span>
+            VEGAS<span className="text-primary">RP</span>
           </span>
         </div>
         <div className="hidden md:flex items-center gap-8">
@@ -108,7 +108,7 @@ function Hero() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-semibold mb-8 neon-box-glow">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-            ER:LC Server on Roblox
+            LVRP - ER:LC
           </div>
         </motion.div>
         
@@ -210,6 +210,91 @@ const features = [
     desc: "Active moderation and administration team ensuring a fair and enjoyable experience."
   }
 ];
+
+type Stats = {
+  playerCount: number;
+  activeOfficers: number;
+  activeCivilians: number;
+  arrestsToday: number;
+  callsResponded: number;
+  totalMembers: number;
+  updatedAt: string | null;
+};
+
+function useStats() {
+  const [stats, setStats] = React.useState<Stats | null>(null);
+  const [live, setLive] = React.useState(false);
+
+  React.useEffect(() => {
+    let cancelled = false;
+    async function fetchStats() {
+      try {
+        const res = await fetch("/api/stats");
+        if (!res.ok) return;
+        const data: Stats = await res.json();
+        if (!cancelled) {
+          setStats(data);
+          setLive(data.updatedAt !== null);
+        }
+      } catch {
+        // network error — stay silent
+      }
+    }
+    fetchStats();
+    const interval = setInterval(fetchStats, 30_000);
+    return () => { cancelled = true; clearInterval(interval); };
+  }, []);
+
+  return { stats, live };
+}
+
+const statItems = [
+  { key: "playerCount" as const,    label: "Players Online",   color: "text-primary" },
+  { key: "activeOfficers" as const, label: "Officers On Duty", color: "text-blue-400" },
+  { key: "activeCivilians" as const,label: "Active Civilians",  color: "text-green-400" },
+  { key: "arrestsToday" as const,   label: "Arrests Today",    color: "text-red-400" },
+  { key: "callsResponded" as const, label: "Calls Responded",  color: "text-yellow-400" },
+  { key: "totalMembers" as const,   label: "Community Members",color: "text-secondary" },
+];
+
+function LiveStats() {
+  const { stats, live } = useStats();
+
+  return (
+    <section className="relative z-10 bg-background py-10 border-y border-primary/15">
+      <div className="container mx-auto px-6">
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <span
+            className={`inline-block w-2 h-2 rounded-full ${live ? "bg-green-400" : "bg-foreground/30"}`}
+            style={live ? { boxShadow: "0 0 8px #4ade80", animation: "pulse 2s infinite" } : {}}
+          />
+          <span className="text-xs uppercase tracking-widest font-mono text-foreground/50">
+            {live ? "Live Server Stats" : "Waiting for game server"}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+          {statItems.map(({ key, label, color }) => (
+            <motion.div
+              key={key}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center gap-1 rounded-xl bg-card/60 border border-primary/10 px-4 py-5 text-center"
+            >
+              <span className={`text-3xl font-display font-black tabular-nums ${color}`}>
+                {stats ? stats[key].toLocaleString() : "—"}
+              </span>
+              <span className="text-[10px] uppercase tracking-widest text-foreground/50 font-mono leading-tight">
+                {label}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function Features() {
   return (
@@ -572,6 +657,7 @@ function CTA() {
               <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-black/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
               <span>Join discord.gg/vegasrp</span>
             </a>
+            <br></br>
             <a 
               href="https://policeroleplay.community/join/LasvegasRP"
               target="_blank"
@@ -629,6 +715,7 @@ function Home() {
       
       <Navbar />
       <Hero />
+      <LiveStats />
       <Features />
       <Departments />
       <CommunityGallery />

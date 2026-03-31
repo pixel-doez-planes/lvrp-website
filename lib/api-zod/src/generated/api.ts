@@ -14,3 +14,32 @@ import * as zod from "zod";
 export const HealthCheckResponse = zod.object({
   status: zod.string(),
 });
+
+/**
+ * Player stats payload sent via POST from the game server
+ */
+export const PlayerStatsInput = zod.object({
+  playerCount: zod.number().int().min(0),
+  activeOfficers: zod.number().int().min(0),
+  activeCivilians: zod.number().int().min(0),
+  arrestsToday: zod.number().int().min(0),
+  callsResponded: zod.number().int().min(0),
+  totalMembers: zod.number().int().min(0).optional(),
+});
+
+export type PlayerStatsInputType = zod.infer<typeof PlayerStatsInput>;
+
+/**
+ * Player stats response returned to the frontend
+ */
+export const PlayerStatsResponse = zod.object({
+  playerCount: zod.number().int(),
+  activeOfficers: zod.number().int(),
+  activeCivilians: zod.number().int(),
+  arrestsToday: zod.number().int(),
+  callsResponded: zod.number().int(),
+  totalMembers: zod.number().int(),
+  updatedAt: zod.string().nullable(),
+});
+
+export type PlayerStatsResponseType = zod.infer<typeof PlayerStatsResponse>;
