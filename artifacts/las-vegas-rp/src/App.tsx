@@ -428,12 +428,12 @@ function Departments() {
 //    Row 1 scrolls left, Row 2 scrolls right.
 // ─────────────────────────────────────────────────────────────────────────────
 const galleryRow1: (string | null)[] = [
-  null, // e.g. "/gallery/photo1.jpg"
-  null,
-  null,
-  null,
-  null,
-  null,
+  '/gallery/lvfr-1.png', // e.g. "/gallery/photo1.jpg"
+  '/gallery/lvfr-2.png',
+  '/gallery/ndot-1.jpg',
+  '/gallery/lvfr-3.jpg',
+  '/gallery/ccfd-1.png',
+  '/gallery/ccfd-2.png',
 ];
 
 const galleryRow2: (string | null)[] = [
