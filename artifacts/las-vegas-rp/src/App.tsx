@@ -215,8 +215,6 @@ type Stats = {
   playersOnline: number;
   staffOnline: number;
   discordMembers: number;
-  activePatrols: number;
-  totalSessions: number;
   serverStatus: "online" | "offline" | "maintenance";
   updatedAt: string | null;
 };
@@ -249,11 +247,9 @@ function useStats() {
 }
 
 const statItems = [
-  { key: "playersOnline" as const,  label: "Players Online",    color: "text-primary" },
-  { key: "staffOnline" as const,    label: "Staff Online",      color: "text-yellow-400" },
-  { key: "discordMembers" as const, label: "Discord Members",   color: "text-secondary" },
-  { key: "activePatrols" as const,  label: "Active Patrols",    color: "text-blue-400" },
-  { key: "totalSessions" as const,  label: "Total Sessions",    color: "text-green-400" },
+  { key: "playersOnline" as const,  label: "Players Online",  color: "text-primary" },
+  { key: "staffOnline" as const,    label: "Staff Online",    color: "text-yellow-400" },
+  { key: "discordMembers" as const, label: "Discord Members", color: "text-secondary" },
 ];
 
 function LiveStats() {
@@ -272,7 +268,7 @@ function LiveStats() {
           </span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto w-full">
           {statItems.map(({ key, label, color }) => (
             <motion.div
               key={key}
@@ -376,7 +372,7 @@ const departments = [
     color: "from-blue-500 to-blue-900",
     shadow: "hover:shadow-[0_0_30px_rgba(59,130,246,0.35)]",
     border: "group-hover:border-blue-500",
-    desc: "The primary law enforcement agency serving Las Vegas and unincorporated Clark County. Conduct high-speed pursuits, tactical operations, and keep the neon streets in check.",
+    desc: "The primary LEO department in Las Vegas. Here to ensure you are safe within Las Vegas.",
     image: null, // e.g. "/departments/LVMPD.jpg"
   },
   {
@@ -386,7 +382,7 @@ const departments = [
     color: "from-indigo-500 to-indigo-900",
     shadow: "hover:shadow-[0_0_30px_rgba(99,102,241,0.35)]",
     border: "group-hover:border-indigo-500",
-    desc: "Serving the city of North Las Vegas with a separate jurisdiction from Metro. Patrol the north end, respond to calls, and uphold the law in a distinct part of the valley.",
+    desc: "Serving the city in North Las Vegas. Here to ensure you are safe everywhere.",
     image: "/departments/nlvpd-dep.jpg"
   },
   {
@@ -396,7 +392,7 @@ const departments = [
     color: "from-zinc-500 to-zinc-900",
     shadow: "hover:shadow-[0_0_30px_rgba(113,113,122,0.35)]",
     border: "group-hover:border-zinc-500",
-    desc: "Elite tactical unit deployed for high-risk operations, hostage rescue, and heavily armed incidents. The last line of defense when standard patrol is not enough.",
+    desc: "Elite tactical unit deployed for high-risk operations, hostage rescue, and heavily armed incidents. The last line of defense when standard police is not enough.",
     image: null, // e.g. "/departments/SWAT.jpg"
   },
   {
@@ -406,7 +402,7 @@ const departments = [
     color: "from-yellow-500 to-yellow-900",
     shadow: "hover:shadow-[0_0_30px_rgba(234,179,8,0.35)]",
     border: "group-hover:border-yellow-500",
-    desc: "Clark County's sheriff department handling county-level law enforcement, corrections, and civil duties across a wide jurisdiction stretching beyond the city limits.",
+    desc: "Clark County's sheriff office, here to protect you everywhere in the city. They work day and night to protect you,",
     image: "/departments/ccso-dep.jpg"
   },
   {
@@ -426,7 +422,7 @@ const departments = [
     color: "from-red-500 to-red-900",
     shadow: "hover:shadow-[0_0_30px_rgba(239,68,68,0.35)]",
     border: "group-hover:border-red-500",
-    desc: "City of Las Vegas' fire and emergency services division. Fight structure fires, respond to vehicle accidents, and deliver life-saving emergency medical care across the strip.",
+    desc: "City of Las Vegas' fire and emergency services division. Fight structure fires, respond to vehicle accidents, and deliver life-saving emergency medical care across the city.",
     image: '/departments/lvfr-dep.jpg'
   },
   {
@@ -440,7 +436,7 @@ const departments = [
     image: "/departments/ccfd-dep.jpg"
   },
   {
-    name: "DOT",
+    name: "NDOT",
     full: "Nevada Department of Transportation",
     icon: <Truck className="w-6 h-6" />,
     color: "from-lime-500 to-lime-900",

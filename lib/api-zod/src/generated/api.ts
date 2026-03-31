@@ -22,8 +22,6 @@ export const PlayerStatsInput = zod.object({
   playersOnline: zod.number().int().min(0),
   staffOnline: zod.number().int().min(0),
   discordMembers: zod.number().int().min(0),
-  activePatrols: zod.number().int().min(0),
-  totalSessions: zod.number().int().min(0),
   serverStatus: zod.enum(["online", "offline", "maintenance"]).optional(),
 });
 
@@ -36,8 +34,6 @@ export const PlayerStatsResponse = zod.object({
   playersOnline: zod.number().int(),
   staffOnline: zod.number().int(),
   discordMembers: zod.number().int(),
-  activePatrols: zod.number().int(),
-  totalSessions: zod.number().int(),
   serverStatus: zod.enum(["online", "offline", "maintenance"]),
   updatedAt: zod.string().nullable(),
 });

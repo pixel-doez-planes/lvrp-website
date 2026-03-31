@@ -7,8 +7,6 @@ const DEFAULT_STATS = {
   playersOnline: 0,
   staffOnline: 0,
   discordMembers: 0,
-  activePatrols: 0,
-  totalSessions: 0,
   serverStatus: "online" as "online" | "offline" | "maintenance",
   updatedAt: null as string | null,
 };
@@ -47,8 +45,6 @@ router.post("/stats", (req, res) => {
     playersOnline: result.data.playersOnline,
     staffOnline: result.data.staffOnline,
     discordMembers: result.data.discordMembers,
-    activePatrols: result.data.activePatrols,
-    totalSessions: result.data.totalSessions,
     serverStatus: result.data.serverStatus ?? currentStats.serverStatus,
     updatedAt: new Date().toISOString(),
   };
