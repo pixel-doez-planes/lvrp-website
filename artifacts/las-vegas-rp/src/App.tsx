@@ -281,7 +281,7 @@ const departments = [
     shadow: "hover:shadow-[0_0_30px_rgba(99,102,241,0.35)]",
     border: "group-hover:border-indigo-500",
     desc: "Serving the city of North Las Vegas with a separate jurisdiction from Metro. Patrol the north end, respond to calls, and uphold the law in a distinct part of the valley.",
-    image: null, // e.g. "/departments/NLVPD.jpg"
+    image: "/departments/nlvpd-dep.png"
   },
   {
     name: "SWAT",
@@ -331,7 +331,7 @@ const departments = [
     shadow: "hover:shadow-[0_0_30px_rgba(249,115,22,0.35)]",
     border: "group-hover:border-orange-500",
     desc: "Protecting unincorporated Clark County with fire suppression and emergency medical services. From suburban neighborhoods to desert terrain, CCFD covers it all.",
-    image: null, // e.g. "/departments/CCFD.jpg"
+    image: "/departments/ccfd-dep.png"
   },
   {
     name: "DOT",
