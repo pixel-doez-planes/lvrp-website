@@ -421,15 +421,14 @@ function Departments() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// GALLERY PHOTOS
-// To add images to the scrolling gallery:
-//   1. Upload your image files into  public/gallery/  (any name, any order)
-//   2. Add the filename to the array below, e.g. "/gallery/patrol.jpg"
-//   3. Leave null entries as placeholders until you have photos ready.
-//   Row 1 scrolls left, Row 2 scrolls right — they loop automatically.
+// GALLERY PHOTOS — add your images here
+// 1. Upload image files into  artifacts/las-vegas-rp/public/gallery/
+// 2. Replace null with the path, e.g. "/gallery/patrol.jpg"
+// 3. Add as many entries as you want — they loop infinitely.
+//    Row 1 scrolls left, Row 2 scrolls right.
 // ─────────────────────────────────────────────────────────────────────────────
 const galleryRow1: (string | null)[] = [
-  null, // replace with e.g. "/gallery/photo1.jpg"
+  null, // e.g. "/gallery/photo1.jpg"
   null,
   null,
   null,
@@ -438,7 +437,7 @@ const galleryRow1: (string | null)[] = [
 ];
 
 const galleryRow2: (string | null)[] = [
-  null, // replace with e.g. "/gallery/photo7.jpg"
+  null, // e.g. "/gallery/photo7.jpg"
   null,
   null,
   null,
@@ -446,19 +445,23 @@ const galleryRow2: (string | null)[] = [
   null,
 ];
 
-function GalleryCard({ src, index }: { src: string | null; index: number }) {
+function GalleryCard({ src, label }: { src: string | null; label: number }) {
   return (
-    <div className="flex-none w-[280px] md:w-[400px] aspect-[4/3] rounded-2xl border border-primary/15 bg-card/80 overflow-hidden relative group">
+    <div
+      style={{ flex: "0 0 auto", width: "380px", aspectRatio: "4/3" }}
+      className="rounded-2xl border border-primary/20 bg-card/80 overflow-hidden relative group"
+    >
       {src ? (
         <img
           src={src}
-          alt={`Gallery image ${index + 1}`}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          alt={`Gallery photo ${label}`}
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          className="transition-transform duration-500 group-hover:scale-105"
         />
       ) : (
-        <div className="w-full h-full flex flex-col items-center justify-center gap-2">
-          <span className="text-primary/25 text-3xl font-thin">+</span>
-          <span className="text-[9px] uppercase tracking-widest text-primary/25 font-mono">Photo {index + 1}</span>
+        <div style={{ width: "100%", height: "100%" }} className="flex flex-col items-center justify-center gap-2">
+          <span className="text-primary/25 text-4xl leading-none">+</span>
+          <span className="text-[9px] uppercase tracking-widest text-primary/25 font-mono">Photo {label}</span>
         </div>
       )}
     </div>
@@ -467,11 +470,13 @@ function GalleryCard({ src, index }: { src: string | null; index: number }) {
 
 function GalleryTrack({ images, direction }: { images: (string | null)[]; direction: "left" | "right" }) {
   const doubled = [...images, ...images];
+  const anim = direction === "left"
+    ? { animation: "gallery-scroll-left 35s linear infinite" }
+    : { animation: "gallery-scroll-right 40s linear infinite" };
   return (
-    <div className={direction === "left" ? "gallery-track-left gap-4" : "gallery-track-right gap-4"}
-      style={{ gap: "1rem" }}>
+    <div style={{ display: "flex", gap: "1rem", width: "max-content", ...anim }}>
       {doubled.map((src, i) => (
-        <GalleryCard key={i} src={src} index={i % images.length} />
+        <GalleryCard key={i} src={src} label={(i % images.length) + 1} />
       ))}
     </div>
   );
@@ -502,19 +507,29 @@ function CommunityGallery() {
         </motion.p>
       </div>
 
-      {/* Gallery rows with edge fade */}
+      {/* Scrolling rows with fade edges */}
       <div className="relative flex flex-col gap-5">
-        {/* Fade edges */}
         <div className="pointer-events-none absolute inset-y-0 left-0 w-32 z-10 bg-gradient-to-r from-background to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-32 z-10 bg-gradient-to-l from-background to-transparent" />
 
-        <div className="overflow-hidden">
+        <div style={{ overflow: "hidden" }}>
           <GalleryTrack images={galleryRow1} direction="left" />
         </div>
-        <div className="overflow-hidden">
+        <div style={{ overflow: "hidden" }}>
           <GalleryTrack images={galleryRow2} direction="right" />
         </div>
       </div>
+
+      <style>{`
+        @keyframes gallery-scroll-left {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes gallery-scroll-right {
+          0%   { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+      `}</style>
     </section>
   );
 }
