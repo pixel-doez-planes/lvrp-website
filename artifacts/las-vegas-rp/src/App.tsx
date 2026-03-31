@@ -705,6 +705,9 @@ function Footer() {
           &copy; {new Date().getFullYear()} Las Vegas Roleplay. All rights reserved. Not affiliated with Roblox or Police Roleplay Community.
         </p>
 
+        <p className="text-foreground/50 text-sm text-center md:text-left">
+          All photos used in this are owned by Las Vegas Roleplay. They were taken by Las Vegas Roleplay Media Team.
+        </p>
         <div className="flex items-center gap-4">
           <a 
             href="https://discord.gg/vegasrp" 
