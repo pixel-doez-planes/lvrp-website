@@ -185,6 +185,11 @@ const features = [
     desc: "Highly organized, realistic, and immersive RP scenarios tailored for serious players."
   },
   {
+    icon: <Users className="w-8 h-8" />,
+    title: "24/7 Sessions",
+    desc: "Sessions run 24/7, ensuring you never miss out on the action. With the session being active for over 600 days!"
+  },
+  {
     icon: <PaintBucket className="w-8 h-8" />,
     title: "Custom Liveries",
     desc: "Exclusively designed vehicle liveries for all departments, bringing authentic Vegas style."
@@ -192,7 +197,7 @@ const features = [
   {
     icon: <Building2 className="w-8 h-8" />,
     title: "Custom Departments",
-    desc: "Multiple departments including LVMPD, NLVPD, CCSO, NHP, LVFR, CCFD, DOT, and more."
+    desc: "Multiple departments including LVMPD, NLVPD, CCSO, NHP, LVFR, CCFD, DOT, and more. With some of the departments being whitelisted for extra realism."
   },
   {
     icon: <Users className="w-8 h-8" />,
@@ -552,7 +557,7 @@ function CTA() {
               <Dice6 className="w-14 h-14 text-primary drop-shadow-[0_0_15px_rgba(157,78,221,0.8)]" />
             </div>
             <h2 className="text-5xl md:text-7xl font-display font-black text-white mb-6 tracking-tight">
-              Ready to Hit <br/> The <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary neon-text-glow">Strip?</span>
+              Ready to start <br/> your <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary neon-text-glow">Journey?</span>
             </h2>
             <p className="text-xl text-foreground/80 max-w-2xl mb-12">
               Join thousands of other players in the most immersive ER:LC experience. Your story begins now.
@@ -566,6 +571,16 @@ function CTA() {
             >
               <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-black/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
               <span>Join discord.gg/vegasrp</span>
+            </a>
+            <a 
+              href="https://policeroleplay.community/join/LasvegasRP"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="button-cta-joinnow"
+              className="group relative inline-flex items-center gap-3 px-10 py-5 bg-white text-background rounded-full font-bold text-xl overflow-hidden transition-all hover:scale-105 shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)]"
+            >
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-black/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
+              <span>Join the server</span>
             </a>
           </div>
         </motion.div>
@@ -665,7 +680,7 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
         transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
       >
         <img
-          src="/loading-logo.jpeg"
+          src="/loading-logo.png"
           alt="Las Vegas Roleplay Logo"
           width={120}
           height={120}
