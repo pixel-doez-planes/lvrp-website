@@ -19,12 +19,12 @@ export const HealthCheckResponse = zod.object({
  * Player stats payload sent via POST from the game server
  */
 export const PlayerStatsInput = zod.object({
-  playerCount: zod.number().int().min(0),
-  activeOfficers: zod.number().int().min(0),
-  activeCivilians: zod.number().int().min(0),
-  arrestsToday: zod.number().int().min(0),
-  callsResponded: zod.number().int().min(0),
-  totalMembers: zod.number().int().min(0).optional(),
+  playersOnline: zod.number().int().min(0),
+  staffOnline: zod.number().int().min(0),
+  discordMembers: zod.number().int().min(0),
+  activePatrols: zod.number().int().min(0),
+  totalSessions: zod.number().int().min(0),
+  serverStatus: zod.enum(["online", "offline", "maintenance"]).optional(),
 });
 
 export type PlayerStatsInputType = zod.infer<typeof PlayerStatsInput>;
@@ -33,12 +33,12 @@ export type PlayerStatsInputType = zod.infer<typeof PlayerStatsInput>;
  * Player stats response returned to the frontend
  */
 export const PlayerStatsResponse = zod.object({
-  playerCount: zod.number().int(),
-  activeOfficers: zod.number().int(),
-  activeCivilians: zod.number().int(),
-  arrestsToday: zod.number().int(),
-  callsResponded: zod.number().int(),
-  totalMembers: zod.number().int(),
+  playersOnline: zod.number().int(),
+  staffOnline: zod.number().int(),
+  discordMembers: zod.number().int(),
+  activePatrols: zod.number().int(),
+  totalSessions: zod.number().int(),
+  serverStatus: zod.enum(["online", "offline", "maintenance"]),
   updatedAt: zod.string().nullable(),
 });
 

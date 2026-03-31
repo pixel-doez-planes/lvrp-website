@@ -4,12 +4,12 @@ import { PlayerStatsInput, PlayerStatsResponse } from "@workspace/api-zod";
 const router: IRouter = Router();
 
 const DEFAULT_STATS = {
-  playerCount: 0,
-  activeOfficers: 0,
-  activeCivilians: 0,
-  arrestsToday: 0,
-  callsResponded: 0,
-  totalMembers: 0,
+  playersOnline: 0,
+  staffOnline: 0,
+  discordMembers: 0,
+  activePatrols: 0,
+  totalSessions: 0,
+  serverStatus: "online" as "online" | "offline" | "maintenance",
   updatedAt: null as string | null,
 };
 
@@ -44,12 +44,12 @@ router.post("/stats", (req, res) => {
   }
 
   currentStats = {
-    playerCount: result.data.playerCount,
-    activeOfficers: result.data.activeOfficers,
-    activeCivilians: result.data.activeCivilians,
-    arrestsToday: result.data.arrestsToday,
-    callsResponded: result.data.callsResponded,
-    totalMembers: result.data.totalMembers ?? currentStats.totalMembers,
+    playersOnline: result.data.playersOnline,
+    staffOnline: result.data.staffOnline,
+    discordMembers: result.data.discordMembers,
+    activePatrols: result.data.activePatrols,
+    totalSessions: result.data.totalSessions,
+    serverStatus: result.data.serverStatus ?? currentStats.serverStatus,
     updatedAt: new Date().toISOString(),
   };
 

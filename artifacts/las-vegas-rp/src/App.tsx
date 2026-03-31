@@ -212,12 +212,12 @@ const features = [
 ];
 
 type Stats = {
-  playerCount: number;
-  activeOfficers: number;
-  activeCivilians: number;
-  arrestsToday: number;
-  callsResponded: number;
-  totalMembers: number;
+  playersOnline: number;
+  staffOnline: number;
+  discordMembers: number;
+  activePatrols: number;
+  totalSessions: number;
+  serverStatus: "online" | "offline" | "maintenance";
   updatedAt: string | null;
 };
 
@@ -249,12 +249,11 @@ function useStats() {
 }
 
 const statItems = [
-  { key: "playerCount" as const,    label: "Players Online",   color: "text-primary" },
-  { key: "activeOfficers" as const, label: "Officers On Duty", color: "text-blue-400" },
-  { key: "activeCivilians" as const,label: "Active Civilians",  color: "text-green-400" },
-  { key: "arrestsToday" as const,   label: "Arrests Today",    color: "text-red-400" },
-  { key: "callsResponded" as const, label: "Calls Responded",  color: "text-yellow-400" },
-  { key: "totalMembers" as const,   label: "Community Members",color: "text-secondary" },
+  { key: "playersOnline" as const,  label: "Players Online",    color: "text-primary" },
+  { key: "staffOnline" as const,    label: "Staff Online",      color: "text-yellow-400" },
+  { key: "discordMembers" as const, label: "Discord Members",   color: "text-secondary" },
+  { key: "activePatrols" as const,  label: "Active Patrols",    color: "text-blue-400" },
+  { key: "totalSessions" as const,  label: "Total Sessions",    color: "text-green-400" },
 ];
 
 function LiveStats() {
@@ -273,7 +272,7 @@ function LiveStats() {
           </span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {statItems.map(({ key, label, color }) => (
             <motion.div
               key={key}
@@ -291,6 +290,23 @@ function LiveStats() {
             </motion.div>
           ))}
         </div>
+
+        {stats && (
+          <div className="flex justify-center mt-4">
+            <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-mono border ${
+              stats.serverStatus === "online"
+                ? "border-green-500/30 bg-green-500/10 text-green-400"
+                : stats.serverStatus === "maintenance"
+                ? "border-yellow-500/30 bg-yellow-500/10 text-yellow-400"
+                : "border-red-500/30 bg-red-500/10 text-red-400"
+            }`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${
+                stats.serverStatus === "online" ? "bg-green-400" : stats.serverStatus === "maintenance" ? "bg-yellow-400" : "bg-red-400"
+              }`} />
+              Server {stats.serverStatus}
+            </span>
+          </div>
+        )}
       </div>
     </section>
   );
