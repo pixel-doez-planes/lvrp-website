@@ -22,7 +22,9 @@ import {
   Shield,
   Star,
   Truck,
-  Activity
+  Activity,
+  Menu,
+  X,
 } from "lucide-react";
 import NotFound from "@/pages/not-found";
 
@@ -39,39 +41,97 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const navLinks = [
+    { href: "#features", label: "Features" },
+    { href: "#departments", label: "Departments" },
+    { href: "#directors", label: "Directors" },
+    { href: "#community", label: "Community" },
+  ];
+
   return (
-    <motion.nav 
+    <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/80 backdrop-blur-md border-b border-primary/20 shadow-[0_0_15px_rgba(157,78,221,0.1)]" : "bg-transparent"
+        scrolled || mobileOpen ? "bg-background/95 backdrop-blur-md border-b border-primary/20 shadow-[0_0_15px_rgba(157,78,221,0.1)]" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-        <div className="flex items-center gap-2">
+        {/* Logo */}
+        <a href="#" className="flex items-center gap-2">
           <Dice5 className="w-7 h-7 text-primary" />
           <Dice6 className="w-7 h-7 text-primary -ml-1" />
           <span className="font-display font-bold text-xl tracking-wider text-white neon-text-glow">
             VEGAS<span className="text-primary">RP</span>
           </span>
-        </div>
-        <div className="hidden md:flex items-center gap-8">
-          <a href="#features" className="text-sm font-medium text-foreground/80 hover:text-white transition-colors">Features</a>
-          <a href="#departments" className="text-sm font-medium text-foreground/80 hover:text-white transition-colors">Departments</a>
-          <a href="#directors" className="text-sm font-medium text-foreground/80 hover:text-white transition-colors">Directors</a>
-          <a href="#community" className="text-sm font-medium text-foreground/80 hover:text-white transition-colors">Community</a>
-        </div>
-        <a 
-          href="https://discord.gg/vegasrp" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          data-testid="link-nav-discord"
-          className="px-6 py-2 rounded-full bg-primary/20 border border-primary/50 text-white font-semibold text-sm hover:bg-primary/40 hover:scale-105 transition-all duration-300 neon-box-glow"
-        >
-          Join Discord
         </a>
+
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((l) => (
+            <a key={l.href} href={l.href} className="text-sm font-medium text-foreground/80 hover:text-white transition-colors">
+              {l.label}
+            </a>
+          ))}
+        </div>
+
+        {/* Desktop CTA + Mobile hamburger */}
+        <div className="flex items-center gap-3">
+          <a
+            href="https://discord.gg/vegasrp"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="link-nav-discord"
+            className="hidden sm:inline-flex px-6 py-2 rounded-full bg-primary/20 border border-primary/50 text-white font-semibold text-sm hover:bg-primary/40 hover:scale-105 transition-all duration-300 neon-box-glow"
+          >
+            Join Discord
+          </a>
+          <button
+            className="md:hidden p-2 text-foreground/80 hover:text-white transition-colors"
+            onClick={() => setMobileOpen((o) => !o)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile dropdown */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden overflow-hidden border-t border-primary/20 bg-background/95 backdrop-blur-md"
+          >
+            <div className="container mx-auto px-6 py-4 flex flex-col gap-1">
+              {navLinks.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="py-3 px-2 text-base font-medium text-foreground/80 hover:text-white border-b border-primary/10 last:border-0 transition-colors"
+                >
+                  {l.label}
+                </a>
+              ))}
+              <a
+                href="https://discord.gg/vegasrp"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="mt-3 w-full text-center px-6 py-3 rounded-full bg-primary/20 border border-primary/50 text-white font-semibold text-sm hover:bg-primary/40 transition-all neon-box-glow"
+              >
+                Join Discord
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }
@@ -119,7 +179,7 @@ function Hero() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-          className="text-6xl md:text-8xl lg:text-9xl font-display font-black text-white tracking-tighter mb-6 neon-text-glow uppercase"
+          className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-display font-black text-white tracking-tighter mb-6 neon-text-glow uppercase"
         >
           Las Vegas <br/>
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary bg-[length:200%_auto] animate-gradient">
@@ -553,8 +613,7 @@ const galleryRow2: (string | null)[] = [
 function GalleryCard({ src, label }: { src: string | null; label: number }) {
   return (
     <div
-      style={{ flex: "0 0 auto", width: "380px", aspectRatio: "4/3" }}
-      className="rounded-2xl border border-primary/20 bg-card/80 overflow-hidden relative group"
+      className="flex-none w-[240px] sm:w-[340px] md:w-[400px] aspect-[4/3] rounded-2xl border border-primary/20 bg-card/80 overflow-hidden relative group"
     >
       {src ? (
         <img
@@ -575,11 +634,11 @@ function GalleryCard({ src, label }: { src: string | null; label: number }) {
 
 function GalleryTrack({ images, direction }: { images: (string | null)[]; direction: "left" | "right" }) {
   const doubled = [...images, ...images];
-  const anim = direction === "left"
+  const animStyle = direction === "left"
     ? { animation: "gallery-scroll-left 35s linear infinite" }
     : { animation: "gallery-scroll-right 40s linear infinite" };
   return (
-    <div style={{ display: "flex", gap: "1rem", width: "max-content", ...anim }}>
+    <div className="flex gap-3 sm:gap-4" style={{ width: "max-content", ...animStyle }}>
       {doubled.map((src, i) => (
         <GalleryCard key={i} src={src} label={(i % images.length) + 1} />
       ))}
@@ -651,38 +710,40 @@ function CTA() {
         >
           <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-card to-secondary/20"></div>
           
-          <div className="relative z-10 px-6 py-24 md:py-32 text-center flex flex-col items-center">
+          <div className="relative z-10 px-6 py-14 md:py-24 text-center flex flex-col items-center">
             <div className="flex items-center gap-1 mb-8">
               <Dice5 className="w-14 h-14 text-primary drop-shadow-[0_0_15px_rgba(157,78,221,0.8)]" />
               <Dice6 className="w-14 h-14 text-primary drop-shadow-[0_0_15px_rgba(157,78,221,0.8)]" />
             </div>
-            <h2 className="text-5xl md:text-7xl font-display font-black text-white mb-6 tracking-tight">
-              Ready to start <br/> your <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary neon-text-glow">Journey?</span>
+            <h2 className="text-3xl sm:text-5xl md:text-7xl font-display font-black text-white mb-6 tracking-tight">
+              Ready to start your{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary neon-text-glow">Journey?</span>
             </h2>
-            <p className="text-xl text-foreground/80 max-w-2xl mb-12">
+            <p className="text-base sm:text-xl text-foreground/80 max-w-2xl mb-10 px-2">
               Join thousands of other players in the most immersive ER:LC experience. Your story begins now.
             </p>
-            <a 
-              href="https://discord.gg/vegasrp"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-testid="button-cta-discord"
-              className="group relative inline-flex items-center gap-3 px-10 py-5 bg-white text-background rounded-full font-bold text-xl overflow-hidden transition-all hover:scale-105 shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)]"
-            >
-              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-black/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
-              <span>Join discord.gg/vegasrp</span>
-            </a>
-            <br></br>
-            <a 
-              href="https://policeroleplay.community/join/LasvegasRP"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-testid="button-cta-joinnow"
-              className="group relative inline-flex items-center gap-3 px-10 py-5 bg-white text-background rounded-full font-bold text-xl overflow-hidden transition-all hover:scale-105 shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)]"
-            >
-              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-black/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
-              <span>Join the server</span>
-            </a>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+              <a
+                href="https://discord.gg/vegasrp"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="button-cta-discord"
+                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-background rounded-full font-bold text-lg overflow-hidden transition-all hover:scale-105 shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] w-full sm:w-auto"
+              >
+                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-black/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
+                <span>Join discord.gg/vegasrp</span>
+              </a>
+              <a
+                href="https://policeroleplay.community/join/LasvegasRP"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="button-cta-joinnow"
+                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-background rounded-full font-bold text-lg overflow-hidden transition-all hover:scale-105 shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] w-full sm:w-auto"
+              >
+                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-black/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
+                <span>Join the server</span>
+              </a>
+            </div>
           </div>
         </motion.div>
       </div>
@@ -733,19 +794,39 @@ function Footer() {
 // ─────────────────────────────────────────────────────────────────────────────
 const DIRECTORS = [
   {
-    discordId: "000000000000000001", // replace with real Discord user ID
-    role: "Server Director",
+    discordId: "1009544872845377597", // replace with real Discord user ID
+    role: "Director",
     bio: "Leads the overall vision and direction of Las Vegas Roleplay.",
   },
   {
-    discordId: "000000000000000002",
-    role: "Assistant Director",
+    discordId: "351463983087222798",
+    role: "Directive Advisor",
     bio: "Supports daily operations and department leadership.",
   },
   {
-    discordId: "000000000000000003",
-    role: "Community Director",
+    discordId: "1482056336215642143",
+    role: "Deputy Director",
     bio: "Manages community engagement, events, and player experience.",
+  },
+  {
+    discordId: "538877546830233610",
+    role: "Vice Deputy Director",
+    bio: "Manages community engagement, events, and player experience.",
+  },
+  {
+    discordId: "492930551213326336",
+    role: "Assistant Director",
+    bio: "Manages community engagement, events, and player experience.",
+  },
+  {
+    discordId: "875027268903268382",
+    role: "Assistant Director",
+    bio: "Manages community engagement, events, and player experience.",
+  },
+  {
+    discordId: "789249299317653505",
+    role: "Website Developer",
+    bio: "Created this website. That's all.",
   },
 ];
 
@@ -823,7 +904,7 @@ function Directors() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-display font-bold text-white mb-4 neon-text-glow"
           >
-            Meet Our Directors
+            Meet the Team
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -832,7 +913,7 @@ function Directors() {
             transition={{ delay: 0.1 }}
             className="text-foreground/60 max-w-xl mx-auto"
           >
-            The leadership team behind Las Vegas Roleplay.
+            The teams behind Las Vegas Roleplay.
           </motion.p>
         </div>
 
