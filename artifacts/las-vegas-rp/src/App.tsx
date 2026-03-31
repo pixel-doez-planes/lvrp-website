@@ -83,20 +83,22 @@ function Hero() {
   return (
     <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-20">
       {/* Dynamic Background */}
-      <motion.div 
+      <motion.div
         style={{ y, opacity }}
         className="absolute inset-0 z-0"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/20 via-background to-background"></div>
-        {/* Placeholder for uploaded cinematic image */}
-        <div className="absolute inset-0 bg-card/30 backdrop-blur-[2px] flex items-center justify-center border-b border-primary/20">
-          <div className="text-center opacity-30">
-            <span className="block text-sm uppercase tracking-[0.3em] text-primary mb-2">Cinematic Background Slot</span>
-            <div className="w-full h-full max-w-4xl mx-auto aspect-[21/9] rounded-2xl border-2 border-dashed border-primary/30 flex items-center justify-center neon-box-glow">
-              <img src="/skyline.jpg" alt="Las Vegas Skyline" className="w-full h-full object-cover rounded-2xl" />
-            </div>
-          </div>
-        </div>
+        {/* Full-bleed skyline photo */}
+        <img
+          src="/skyline.jpg"
+          alt="Las Vegas Skyline"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        {/* Dark overlay so text stays readable */}
+        <div className="absolute inset-0 bg-background/60" />
+        {/* Radial purple glow on top */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/25 via-transparent to-transparent" />
+        {/* Bottom fade into page background */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent" />
       </motion.div>
 
       {/* Hero Content */}
