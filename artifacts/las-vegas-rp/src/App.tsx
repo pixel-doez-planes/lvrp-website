@@ -301,7 +301,7 @@ const departments = [
     shadow: "hover:shadow-[0_0_30px_rgba(234,179,8,0.35)]",
     border: "group-hover:border-yellow-500",
     desc: "Clark County's sheriff department handling county-level law enforcement, corrections, and civil duties across a wide jurisdiction stretching beyond the city limits.",
-    image: null, // e.g. "/departments/CCSO.jpg"
+    image: "/departments/ccso-dep.jpg"
   },
   {
     name: "NHP",
@@ -321,7 +321,7 @@ const departments = [
     shadow: "hover:shadow-[0_0_30px_rgba(239,68,68,0.35)]",
     border: "group-hover:border-red-500",
     desc: "City of Las Vegas' fire and emergency services division. Fight structure fires, respond to vehicle accidents, and deliver life-saving emergency medical care across the strip.",
-    image: null, // e.g. "/departments/LVFR.jpg"
+    image: '/departments/lvfr-dep.jpg'
   },
   {
     name: "CCFD",
