@@ -455,7 +455,7 @@ const departments = [
     color: "from-zinc-500 to-zinc-900",
     shadow: "hover:shadow-[0_0_30px_rgba(113,113,122,0.35)]",
     border: "group-hover:border-zinc-500",
-    desc: "Elite tactical unit deployed for high-risk operations, hostage rescue, and heavily armed incidents. The last line of defense when standard police is not enough.",
+    desc: "(Whitelisted) Elite tactical unit deployed for high-risk operations, hostage rescue, and heavily armed incidents. The last line of defense when standard police is not enough.",
     image: null, // e.g. "/departments/SWAT.jpg"
   },
   {
@@ -465,7 +465,7 @@ const departments = [
     color: "from-yellow-500 to-yellow-900",
     shadow: "hover:shadow-[0_0_30px_rgba(234,179,8,0.35)]",
     border: "group-hover:border-yellow-500",
-    desc: "Clark County's sheriff office, here to protect you everywhere in the city. They work day and night to protect you,",
+    desc: "(Whitelisted) Clark County's sheriff office, here to protect you everywhere in the city. They work day and night to protect you,",
     image: "/departments/ccso-dep.jpg"
   },
   {
@@ -495,7 +495,7 @@ const departments = [
     color: "from-orange-500 to-orange-900",
     shadow: "hover:shadow-[0_0_30px_rgba(249,115,22,0.35)]",
     border: "group-hover:border-orange-500",
-    desc: "Protecting unincorporated Clark County with fire suppression and emergency medical services. From suburban neighborhoods to desert terrain, CCFD covers it all.",
+    desc: "(Whitelisted) Protecting unincorporated Clark County with fire suppression and emergency medical services. From suburban neighborhoods to desert terrain, CCFD covers it all.",
     image: "/departments/ccfd-dep.jpg"
   },
   {
@@ -860,32 +860,32 @@ const DIRECTORS = [
   {
     discordId: "1009544872845377597", // replace with real Discord user ID
     role: "Director",
-    bio: "Leads the overall vision and direction of Las Vegas Roleplay.",
+    bio: "The highest rank in Vegas. Here to keep the server running smoothly.",
   },
   {
     discordId: "351463983087222798",
     role: "Directive Advisor",
-    bio: "Supports daily operations and department leadership.",
+    bio: "Advises the director with info of how to lead.",
   },
   {
     discordId: "1482056336215642143",
     role: "Deputy Director",
-    bio: "Manages community engagement, events, and player experience.",
+    bio: "Supports the director in daily operations.",
   },
   {
     discordId: "538877546830233610",
     role: "Vice Deputy Director",
-    bio: "Manages community engagement, events, and player experience.",
+    bio: "Supports the director in daily operations.",
   },
   {
     discordId: "492930551213326336",
     role: "Assistant Director",
-    bio: "Manages community engagement, events, and player experience.",
+    bio: "Supports the Vice Deputy Director.",
   },
   {
     discordId: "875027268903268382",
     role: "Assistant Director",
-    bio: "Manages community engagement, events, and player experience.",
+    bio: "Supports the Vice Deputy Director.",
   },
   {
     discordId: "789249299317653505",
@@ -1057,7 +1057,7 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
           alt="Las Vegas Roleplay Logo"
           width={120}
           height={120}
-          className="rounded-2xl"
+          className="rounded-4xl"
         />
       </motion.div>
 
