@@ -12,6 +12,7 @@ import {
   CalendarDays, 
   Wrench,
   ChevronDown,
+  Gamepad2,
   Dice5,
   Dice6,
   CarFront,
@@ -248,7 +249,7 @@ const features = [
     desc: "Highly organized, realistic, and immersive RP scenarios tailored for serious players."
   },
   {
-    icon: <Users className="w-8 h-8" />,
+    icon: <Gamepad2 className="w-8 h-8" />,
     title: "24/7 Sessions",
     desc: "Sessions run 24/7, ensuring you never miss out on the action. With the session being active for over 600 days!"
   },
