@@ -32,6 +32,15 @@ Content-Length: 100
 }
 ```
 
+```/api/directors/:userId/avatar``` -> GET, fill in the :userID with the person you want to search user ID. 
+Sample of Return:
+{
+    "id": "1009544872845377597",
+    "username": "jacob750",
+    "displayName": "Jacob.",
+    "avatarUrl": "https://cdn.discordapp.com/avatars/1009544872845377597/fff661d07437704b021ac5af51c76ca0.png?size=256"
+}
+
 ## Features yet to come.
 These are features on my To-Do list, and their functionality.
 
