@@ -10,6 +10,8 @@ GET https://lvrp-draft.replit.app/api/health
 <br>
 Return: OK
 
+```/api/postonly/update``` -> This will not respond if you try to POST/GET to it. This API Route only runs while building, this is not defined in /routes.ts as it is in /dist. This runs before each promote state to kill all running proccesses of the old version.
+
 ```/api/stats``` ->  This is the API to display and get the data from the LVRPU. This comes with a GET, to get the data most recently POSTed. The other type is POST, this will be authorized with a token (Auth Bearer).
 POST Request Format:
 ```
