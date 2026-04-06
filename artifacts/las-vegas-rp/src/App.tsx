@@ -1011,8 +1011,12 @@ function Home() {
     </div>
   );
 }
-
 function Router() {
+  // catch subdomains
+  // subdomain docs.vegasrp.org redirects to: https://github.com/pixel-doez-planes/lvrp-website/blob/main/readme.md
+  if (window.location.hostname === "docs.vegasrp.org") {
+    window.location.href = "https://github.com/pixel-doez-planes/lvrp-website/blob/main/readme.md";
+  }
   return (
     <Switch>
       <Route path="/" component={Home} />
