@@ -11,7 +11,6 @@ export default function Rulebook() {
     <div className="min-h-screen bg-[#0a0a1a] py-12 px-6">
       <div className="max-w-2xl mx-auto">
 
-        {/* Header */}
         <div className="text-center mb-10">
           <p className="text-purple-400 uppercase tracking-[0.3em] text-xs font-semibold mb-2">Official</p>
           <h1 className="text-4xl font-bold text-white tracking-wide mb-3">VegasRP</h1>
@@ -23,7 +22,6 @@ export default function Rulebook() {
           </div>
         </div>
 
-        {/* Rules */}
         <div className="space-y-2">
           {rules.map((rule) => (
             <div
@@ -38,12 +36,12 @@ export default function Rulebook() {
           ))}
         </div>
 
-        {/* Footer rule */}
         <div className="mt-8 flex items-center justify-center gap-3">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent to-purple-700/40" />
           <div className="w-2 h-2 rotate-45 bg-purple-500/50" />
           <div className="h-px flex-1 bg-gradient-to-l from-transparent to-purple-700/40" />
         </div>
+
       </div>
     </div>
   );
