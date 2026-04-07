@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import Rulebook from "@/pages/rulebook"
 import { 
   ShieldCheck, 
   PaintBucket, 
@@ -371,7 +372,6 @@ function LiveStats() {
     </section>
   );
 }
-
 function Features() {
   return (
     <section id="features" className="py-24 relative z-10 bg-background">
@@ -1020,6 +1020,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/rulebook" component={Rulebook} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -1055,7 +1056,7 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
             "drop-shadow(0 0 12px rgba(157,78,221,0.5))",
           ],
         }}
-        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       >
         <img
           src="/loading-logo.png"
@@ -1089,7 +1090,7 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
           className="h-full bg-primary rounded-full"
           initial={{ x: "-100%" }}
           animate={{ x: "100%" }}
-          transition={{ duration: 2.2, ease: "easeInOut", repeat: Infinity }}
+          transition={{ duration: 5.0, ease: "easeInOut", repeat: Infinity }}
         />
       </motion.div>
     </motion.div>
