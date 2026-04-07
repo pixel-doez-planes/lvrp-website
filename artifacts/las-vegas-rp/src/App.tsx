@@ -1098,7 +1098,7 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
 }
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => !window.location.pathname.includes("/rulebook"));
 
   return (
     <QueryClientProvider client={queryClient}>
