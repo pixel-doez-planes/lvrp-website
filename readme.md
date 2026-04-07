@@ -52,6 +52,14 @@ These are features on my To-Do list, and their functionality.
 **Trailer/Video**
 > This will be a trailer or video of LVRP. This is already built-in, I just need a video file. You can view the layout by going to: https://lvrp-draft.replit.app/?debug=true
 
+**Event Display/System**
+What will be offered in this:
+> A command in the discord. Will resemble something like: ```/event create title:{title_to_use} description:{what_will_be_offered} hostedby:{user_or_users_hosting_event} eventstart:{when_event_will_start} eventend:{when_event_will_end} where:{where_the_end_will_happen}```.
+This will be displayed in the home page.
+- This command should only be run by Community Engagement/Community Handlers.
+- The frontend will be displaying a countdown.
+More on this soon.
+
 ### More soon
 
 &copy; 2026 Las Vegas Roleplay. All Rights Reversed.
