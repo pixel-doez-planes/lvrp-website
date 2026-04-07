@@ -60,6 +60,10 @@ This will be displayed in the home page.
 - The frontend will be displaying a countdown.
 More on this soon.
 
+**Rulebook**
+Self-explanatory.
+Big rulebook with punishments.
+
 ### More soon
 
 &copy; 2026 Las Vegas Roleplay. All Rights Reversed.
